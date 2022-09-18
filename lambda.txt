@@ -1,0 +1,23 @@
+TRUE = λx.λy.x
+FALSE = λx.λy.y
+AND := λp.λq.p q p
+
+AND FALSE TRUE
+
+(λp.λq.p q p) (λx.λy.y) (λx.λy.x)
+              ^^^^^^^^^^^^^^^^^^^
+(λp.λq.p q p) (λy.y) [(λx.λy.x) / x]
+
+(λp.λq.p q p) (λy.y)
+^^^^^^^^^^^^^^^^^^^^^
+λq.p q p [(λy.y) / p]
+
+λq.(λy.y) q (λy.y)
+    ^^^^^^^
+λq.y [q/y] (λy.y)
+
+λq.q (λy.y)
+^^^^^^^^^^
+q [q / (λy.y)]
+
+λy.y
